@@ -40,24 +40,65 @@ namespace Obviousidian.Core.Services
             await _fileService.WriteTextAsync(fullPath, sb.ToString());
         }
 
-        public async Task SaveImageNoteAsync(byte[] imageBytes, string title = null)
+        public async Task SaveImageNoteAsync(byte[] imageBytes, string originalFileName = null)
         {
-            string timestamp = DateTime.Now.ToString("yyyyMMddHHmmss");
-            string imageFileName = $"Img_{timestamp}.png";
-            string noteTitle = title ?? $"Screenshot {DateTime.Now:yyyy-MM-dd HH-mm-ss}";
-            string noteFileName = $"{noteTitle}.md";
+            string fileName;
             
-            // 1. Save Image to Attachments
+            if (!string.IsNullOrWhiteSpace(originalFileName))
+            {
+                // Sanitize original filename
+                 fileName = originalFileName;
+                foreach (char c in System.IO.Path.GetInvalidFileNameChars())
+                {
+                    fileName = fileName.Replace(c, '_');
+                }
+            }
+            else
+            {
+                // Fallback to timestamp
+                string timestamp = DateTime.Now.ToString("yyyyMMddHHmmss");
+                fileName = $"Img_{timestamp}.png";
+            }
+            
+            // 1. Save Image to Attachments (Handle Collisions)
             string attachmentsFolder = "attachments";
-            string imagePath = _vaultService.GetPathFor(attachmentsFolder, imageFileName);
+            string imagePath = _vaultService.GetPathFor(attachmentsFolder, fileName);
+            string finalImageName = fileName;
+
+            int counter = 1;
+            while (_fileService.FileExists(imagePath))
+            {
+                string nameWithoutExt = System.IO.Path.GetFileNameWithoutExtension(fileName);
+                string ext = System.IO.Path.GetExtension(fileName);
+                finalImageName = $"{nameWithoutExt}_{counter}{ext}";
+                imagePath = _vaultService.GetPathFor(attachmentsFolder, finalImageName);
+                counter++;
+            }
+
             await _fileService.WriteBytesAsync(imagePath, imageBytes);
 
             // 2. Create Note in Screenshots
+            string noteTitle = $"Screenshot {DateTime.Now:yyyy-MM-dd HH-mm-ss}";
+            if (!string.IsNullOrWhiteSpace(originalFileName))
+            {
+                noteTitle = System.IO.Path.GetFileNameWithoutExtension(finalImageName); // Use the final unique name
+            }
+
+            string noteFileName = $"{noteTitle}.md";
             string screenshotsFolder = "screenshots";
             string notePath = _vaultService.GetPathFor(screenshotsFolder, noteFileName);
             
+            // Handle Note Collisions (Rare but possible)
+             counter = 1;
+            while (_fileService.FileExists(notePath))
+            {
+                 noteFileName = $"{noteTitle}_{counter}.md";
+                 notePath = _vaultService.GetPathFor(screenshotsFolder, noteFileName);
+                 counter++;
+            }
+
             // Obsidian syntax for image embedding
-            string content = $"![[{imageFileName}]]\n\nCaptured: {DateTime.Now}";
+            string content = $"![[{finalImageName}]]\n\nCaptured: {DateTime.Now}";
             
             await _fileService.WriteTextAsync(notePath, content);
         }

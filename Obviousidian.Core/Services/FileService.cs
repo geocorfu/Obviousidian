@@ -20,6 +20,11 @@ namespace Obviousidian.Core.Services
             return Directory.Exists(path);
         }
 
+        public bool FileExists(string path)
+        {
+            return File.Exists(path);
+        }
+
         public void CreateDirectory(string path)
         {
             Directory.CreateDirectory(path);

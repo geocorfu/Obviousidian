@@ -47,10 +47,10 @@ It runs independently of Obsidian, allowing you to capture ideas, links, and ima
 - Filed in: `notes/`
 - **Format**: Includes YAML frontmatter (`created_at`, `source`, `tags`).
 
-### 2. Images (Clipboard)
-- Copy an image (e.g. `Win+Shift+S`).
-- Click **"Paste from Clipboard"**.
-- App detects the image and shows a placeholder.
+### 2. Images
+- **Clipboard**: Copy an image and click "Paste".
+- **Drag & Drop**: Drop an image file (.png, .jpg) onto the window.
+- **Safety**: Automatically renames files to avoid overwriting (e.g. `image_1.png`).
 - Press **Save**.
 - Image saved to `attachments/`, Note saved to `screenshots/`.
 
