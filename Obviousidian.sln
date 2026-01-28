@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Obviousidian.Core", "Obviousidian.Core\Obviousidian.Core.csproj", "{8218A1B3-5701-4719-88BE-060FA65679FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Obviousidian.App", "Obviousidian.App\Obviousidian.App.csproj", "{AB4C3387-A2F7-4FE3-865C-9FC24227DE64}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8218A1B3-5701-4719-88BE-060FA65679FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8218A1B3-5701-4719-88BE-060FA65679FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8218A1B3-5701-4719-88BE-060FA65679FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8218A1B3-5701-4719-88BE-060FA65679FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB4C3387-A2F7-4FE3-865C-9FC24227DE64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB4C3387-A2F7-4FE3-865C-9FC24227DE64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB4C3387-A2F7-4FE3-865C-9FC24227DE64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB4C3387-A2F7-4FE3-865C-9FC24227DE64}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
