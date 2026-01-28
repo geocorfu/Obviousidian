@@ -55,10 +55,14 @@ It runs independently of Obsidian, allowing you to capture ideas, links, and ima
 - Image saved to `attachments/`, Note saved to `screenshots/`.
 
 ### 3. URLs
-- Paste a connection (e.g., a YouTube link).
-- App auto-detects it.
+- Paste a connection (e.g. YouTube, Medium, Blog).
+- App **fetches the page title** automatically.
+- **Smart Routing**:
+  - `videos/`: YouTube, Vimeo.
+  - `articles/`: Medium, Dev.to, blog posts.
+  - `bookmarks/`: General links.
 - Press **Save**.
-- Filed in: `videos/` (for video sites) or `bookmarks/` (for generic links).
+- **Format**: Markdown link + YAML frontmatter (`url`, `source`).
 
 ## ⚙ Configuration
 Modify `config.json` to change the destination:

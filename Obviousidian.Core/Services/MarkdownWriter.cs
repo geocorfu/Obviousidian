@@ -61,5 +61,39 @@ namespace Obviousidian.Core.Services
             
             await _fileService.WriteTextAsync(notePath, content);
         }
+
+        public async Task SaveUrlNoteAsync(string url, string title, string category)
+        {
+            string cleanTitle = title;
+            if (string.IsNullOrWhiteSpace(cleanTitle))
+            {
+                cleanTitle = "Untitled Link";
+            }
+
+            // Sanitize filename
+            string fileName = cleanTitle;
+            foreach (char c in System.IO.Path.GetInvalidFileNameChars())
+            {
+                fileName = fileName.Replace(c, '_');
+            }
+            // Truncate if too long (max 50 chars for filename)
+            if (fileName.Length > 50) fileName = fileName.Substring(0, 50);
+            
+            fileName += ".md";
+
+            string fullPath = _vaultService.GetPathFor(category, fileName);
+
+            var sb = new System.Text.StringBuilder();
+            sb.AppendLine("---");
+            sb.AppendLine($"created_at: {DateTime.Now:yyyy-MM-dd HH:mm:ss}");
+            sb.AppendLine("source: \"url\"");
+            sb.AppendLine($"url: \"{url}\"");
+            sb.AppendLine("tags: []");
+            sb.AppendLine("---");
+            sb.AppendLine();
+            sb.AppendLine($"# [{cleanTitle}]({url})");
+
+            await _fileService.WriteTextAsync(fullPath, sb.ToString());
+        }
     }
 }
