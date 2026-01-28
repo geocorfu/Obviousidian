@@ -37,14 +37,15 @@ It runs independently of Obsidian, allowing you to capture ideas, links, and ima
    dotnet run --project Obviousidian.App
    ```
 
-*(Note: In V1, the Vault path is currently hardcoded to `C:\Users\George\obsidian-staging`. This will be configurable in future versions.)*
+*(Note: Use `config.json` to set your vault path if it differs from default.)*
 
 ## 📖 Usage
 
 ### 1. Plain Text
 - Type your thought in the main text box.
 - Press **Save**.
-- Filed in: `inbox/`
+- Filed in: `notes/`
+- **Format**: Includes YAML frontmatter (`created_at`, `source`, `tags`).
 
 ### 2. Images (Clipboard)
 - Copy an image (e.g. `Win+Shift+S`).
@@ -58,6 +59,14 @@ It runs independently of Obsidian, allowing you to capture ideas, links, and ima
 - App auto-detects it.
 - Press **Save**.
 - Filed in: `videos/` (for video sites) or `bookmarks/` (for generic links).
+
+## ⚙ Configuration
+Modify `config.json` to change the destination:
+```json
+{
+  "VaultPath": "C:\\Users\\YourName\\Documents\\ObsidianVault"
+}
+```
 
 ## 🏗 Architecture
 

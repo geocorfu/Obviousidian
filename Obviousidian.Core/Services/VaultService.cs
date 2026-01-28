@@ -17,7 +17,7 @@ namespace Obviousidian.Core.Services
 
         private void EnsureDirectories()
         {
-            string[] folders = { "inbox", "bookmarks", "articles", "videos", "screenshots", "attachments" };
+            string[] folders = { "inbox", "notes", "bookmarks", "articles", "videos", "screenshots", "attachments" };
             foreach (var folder in folders)
             {
                 var path = Path.Combine(_vaultPath, folder);

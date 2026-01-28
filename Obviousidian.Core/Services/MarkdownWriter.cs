@@ -27,7 +27,17 @@ namespace Obviousidian.Core.Services
             string folder = targetFolder ?? _vaultService.GetDefaultFolderForText();
             string fullPath = _vaultService.GetPathFor(folder, fileName);
 
-            await _fileService.WriteTextAsync(fullPath, content);
+            // Generate Frontmatter
+            var sb = new System.Text.StringBuilder();
+            sb.AppendLine("---");
+            sb.AppendLine($"created_at: {DateTime.Now:yyyy-MM-dd HH:mm:ss}");
+            sb.AppendLine("source: \"manual\"");
+            sb.AppendLine("tags: []");
+            sb.AppendLine("---");
+            sb.AppendLine();
+            sb.Append(content);
+
+            await _fileService.WriteTextAsync(fullPath, sb.ToString());
         }
 
         public async Task SaveImageNoteAsync(byte[] imageBytes, string title = null)

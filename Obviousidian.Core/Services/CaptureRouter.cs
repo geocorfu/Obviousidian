@@ -25,7 +25,7 @@ namespace Obviousidian.Core.Services
                 return ("bookmarks", "Link");
             }
 
-            return ("inbox", "Text");
+            return ("notes", "Text");
         }
 
         private bool IsUrl(string content)
