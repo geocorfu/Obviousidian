@@ -43,6 +43,7 @@ It runs independently of Obsidian, allowing you to capture ideas, links, and ima
 
 ### 1. Plain Text
 - Type your thought in the main text box.
+- (Optional) **Select Folder**: Use the dropdown to override the default.
 - Press **Save**.
 - Filed in: `notes/`
 - **Format**: Includes YAML frontmatter (`created_at`, `source`, `tags`).
@@ -63,6 +64,12 @@ It runs independently of Obsidian, allowing you to capture ideas, links, and ima
   - `bookmarks/`: General links.
 - Press **Save**.
 - **Format**: Markdown link + YAML frontmatter (`url`, `source`).
+
+## 🧪 How to Verify / Test
+1. **Run the App**: `dotnet run --project Obviousidian.App`
+2. **Test Text**: Type "Hello World", select `notes`, click Save. Check `obsidian-staging/notes/`.
+3. **Test Image**: Drag a PNG file onto the window. Check `obsidian-staging/attachments/`.
+4. **Test URL**: Paste `https://youtube.com`. Check `obsidian-staging/videos/`.
 
 ## ⚙ Configuration
 Modify `config.json` to change the destination:
